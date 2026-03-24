@@ -1,0 +1,9 @@
+error E1();
+error E2();
+error E3();
+error SafeERC20FailedOperation(address token);
+event T(uint256 indexed l, uint256 indexed n, address r, uint256 a);
+function getNonce(uint256 l, address r) returns (uint256);
+function paidFor(uint256 l, address r) returns (uint256);
+function t() returns (address);
+function transfer(uint256 l, uint256 m, address r, uint256 a);

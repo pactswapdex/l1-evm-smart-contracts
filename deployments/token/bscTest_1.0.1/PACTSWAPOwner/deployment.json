@@ -1,0 +1,14 @@
+{
+  "network": "bscTest",
+  "chainId": "97",
+  "address": "0x2cC05458EA6596B14E4c0B879b396dcc3cbe7334",
+  "constructorArgs": [
+    "TestPSO",
+    "TPSO",
+    "100000000000000000000",
+    "0x03951f89fe78e13f295d96eb7afa1e0da726df7d58f9c84f7144e5febc30efeec4"
+  ],
+  "deploymentHash": "0x3d8344aab143027b6e8480dddf856dd4959fc499cad437873a83d210943084e9",
+  "blockNumber": 51923583,
+  "timestamp": "2025-05-15T08:49:40.711Z"
+}

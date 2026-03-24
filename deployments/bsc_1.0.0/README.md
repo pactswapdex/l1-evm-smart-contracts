@@ -1,0 +1,15 @@
+# Deployment Information
+
+**Network:** bsc
+**Chain ID:** 56
+**Block Number:** 46162946
+**Timestamp:** 2025-01-28T13:15:47.261Z
+
+## Deployed Contracts
+
+| Contract | Address | Constructor Args | Deployment Hash |
+|----------|----------|-----------------|----------------|
+| C1Evm | `0x1515982B1031156e437c6BfA5ea763AA54a0b294` | [] | 0x2fabb5b6190319e1c191a12cc32ab5013c14c285612d3cc6154d640880fd9826 |
+| C2Evm | `0x4E0641647b4Bb75B0ecfd136a436C4cE09Fc296A` | [] | 0x130de4f69c9eb37c885be5276d4e99f34babcd08640d5cb99f4820a574959f32 |
+| C1Erc20Bep20 | `0x1590064c6cF4d6BC1476780e2A77D7DC022e1e57` | ["0x55d398326f99059fF775485246999027B3197955"] | 0x8cadffbf47d7fb4ea66328972f62a1bf0863306bef78c3971b3331b057a01f22 |
+| C2Erc20Bep20 | `0x371b5eBEadf34Da576E3E604b70f8580EF383476` | ["0x55d398326f99059fF775485246999027B3197955"] | 0x87fd5be598494941df9c429793e17b028416221fc7027a012e65ba7c5fe5e8c5 |

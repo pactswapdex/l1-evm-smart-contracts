@@ -1,0 +1,76 @@
+Event: Approval
+Signature: Approval(address,address,uint256)
+Topic Hash: 0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925
+Indexed Parameters:
+  address owner (indexed)
+  address spender (indexed)
+
+Event: BurnWithRedeem
+Signature: BurnWithRedeem(address,string,uint256,uint256)
+Topic Hash: 0xac9296e0dca07e18ef6323597b5dd80fdbd82f933f9d8f1276f7f18f61fec963
+Indexed Parameters:
+  address from (indexed)
+
+Event: CoinwebFeeAddressUpdated
+Signature: CoinwebFeeAddressUpdated(string)
+Topic Hash: 0xbe96db850753771cdd805df6bc331459ed170f3d7d90f1c0ceb867e5399133b7
+
+Event: DelegateChanged
+Signature: DelegateChanged(address,address,address)
+Topic Hash: 0x3134e8a2e6d97e929a7e54011ea5485d7d196dd5f0ba4d4ef95803e8e3fc257f
+Indexed Parameters:
+  address delegator (indexed)
+  address fromDelegate (indexed)
+  address toDelegate (indexed)
+
+Event: DelegateVotesChanged
+Signature: DelegateVotesChanged(address,uint256,uint256)
+Topic Hash: 0xdec2bacdd2f05b59de34da9b523dff8be42e5e38e818c82fdb0bae774387a724
+Indexed Parameters:
+  address delegate (indexed)
+
+Event: EIP712DomainChanged
+Signature: EIP712DomainChanged()
+Topic Hash: 0x0a6387c9ea3628b88a633bb4f3b151770f70085117a15f9bf3787cda53f13d31
+
+Event: NewProposal
+Signature: NewProposal(address,string,string)
+Topic Hash: 0x0d414bf9033c0e5efe666dcf2f938a37f7f48cd4faffd7d2b1c36a96cc33df65
+Indexed Parameters:
+  address proposer (indexed)
+
+Event: ProposalCanceled
+Signature: ProposalCanceled(uint256)
+Topic Hash: 0x789cf55be980739dad1d0699b93b58e806b51c9d96619bfa8fe0a28abaa7b30c
+
+Event: ProposalClosed
+Signature: ProposalClosed(uint256,bool)
+Topic Hash: 0xaffed5d901d9fbe9106721fa52653ede403c09699f9f810f6d378acc51fb50fa
+
+Event: ProposalDefeated
+Signature: ProposalDefeated(uint256)
+Topic Hash: 0x3522b002b3ea22609209b2ede7c619a1e7e16781a08fd1ec2233419b00640828
+
+Event: ProposalExecuted
+Signature: ProposalExecuted(address,string,string)
+Topic Hash: 0x27c541d81d714dfdcd142b9115702cf5c3b4dda73d9c9cd63f97f262a22335e4
+Indexed Parameters:
+  address proposer (indexed)
+
+Event: ProposalSucceeded
+Signature: ProposalSucceeded(uint256)
+Topic Hash: 0xe31a7af544b899d3d48ac6e1118ce04897587f9262886cf3bf572e2207a432df
+
+Event: Transfer
+Signature: Transfer(address,address,uint256)
+Topic Hash: 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+Indexed Parameters:
+  address from (indexed)
+  address to (indexed)
+
+Event: Vote
+Signature: Vote(address,uint256,bool,uint256)
+Topic Hash: 0x65f8c50a40ae46ed6b244ba59b93d321216c9638f156760e7f851c2536a3add2
+Indexed Parameters:
+  address voter (indexed)
+

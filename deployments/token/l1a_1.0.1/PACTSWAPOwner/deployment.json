@@ -1,0 +1,14 @@
+{
+  "network": "l1a",
+  "chainId": "1892",
+  "address": "0xDe69576fB589C2F64Fd47E94381E413407306575",
+  "constructorArgs": [
+    "TestPSO",
+    "TPSO",
+    "100000000000000000000",
+    "0x03951f89fe78e13f295d96eb7afa1e0da726df7d58f9c84f7144e5febc30efeec4"
+  ],
+  "deploymentHash": "0x99303031d0f8edd067b2a8de3c7d1e8f657ce3c87fdd533351a55251ad95ef24",
+  "blockNumber": 415809,
+  "timestamp": "2025-05-15T11:25:06.702Z"
+}

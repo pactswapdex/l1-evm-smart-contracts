@@ -1,0 +1,9 @@
+{
+  "network": "l1a",
+  "chainId": "1892",
+  "address": "0x5b50845B94fC47c6172d9ab90845D3613e36Aed5",
+  "constructorArgs": [],
+  "deploymentHash": "0x102233004a2f0135c06ccc5d5081fa5c8705ba63a914c3cd890db28dbe0b231e",
+  "blockNumber": 256987,
+  "timestamp": "2025-01-29T08:49:57.207Z"
+}

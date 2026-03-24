@@ -1,0 +1,74 @@
+Event: Approval
+Signature: Approval(address,address,uint256)
+Topic Hash: 0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925
+Indexed Parameters:
+  address owner (indexed)
+  address spender (indexed)
+
+Event: BurnWithRedeem
+Signature: BurnWithRedeem(address,bytes,uint256,uint256)
+Topic Hash: 0xcc6a20dd4cd8c7b9c305eff0d5f87f32bf63667b6bad3f263b9281d61e04d673
+Indexed Parameters:
+  address from (indexed)
+
+Event: CoinwebFeeAddressUpdated
+Signature: CoinwebFeeAddressUpdated(bytes32,bytes32)
+Topic Hash: 0xe4304084194475768e3b129610f764188b21f237615e4f5cc49962cff9556705
+
+Event: DelegateChanged
+Signature: DelegateChanged(address,address,address)
+Topic Hash: 0x3134e8a2e6d97e929a7e54011ea5485d7d196dd5f0ba4d4ef95803e8e3fc257f
+Indexed Parameters:
+  address delegator (indexed)
+  address fromDelegate (indexed)
+  address toDelegate (indexed)
+
+Event: DelegateVotesChanged
+Signature: DelegateVotesChanged(address,uint256,uint256)
+Topic Hash: 0xdec2bacdd2f05b59de34da9b523dff8be42e5e38e818c82fdb0bae774387a724
+Indexed Parameters:
+  address delegate (indexed)
+
+Event: EIP712DomainChanged
+Signature: EIP712DomainChanged()
+Topic Hash: 0x0a6387c9ea3628b88a633bb4f3b151770f70085117a15f9bf3787cda53f13d31
+
+Event: NewProposal
+Signature: NewProposal(address,bytes32,string)
+Topic Hash: 0x8604fc9b4a0274cb873b733a53a9c0b18da861d91d98fbc413df944be302c720
+Indexed Parameters:
+  address proposer (indexed)
+
+Event: ProposalCanceled
+Signature: ProposalCanceled(uint256)
+Topic Hash: 0x789cf55be980739dad1d0699b93b58e806b51c9d96619bfa8fe0a28abaa7b30c
+
+Event: ProposalClosed
+Signature: ProposalClosed(uint256,bool)
+Topic Hash: 0xaffed5d901d9fbe9106721fa52653ede403c09699f9f810f6d378acc51fb50fa
+
+Event: ProposalDefeated
+Signature: ProposalDefeated(uint256)
+Topic Hash: 0x3522b002b3ea22609209b2ede7c619a1e7e16781a08fd1ec2233419b00640828
+
+Event: ProposalSucceeded
+Signature: ProposalSucceeded(uint256)
+Topic Hash: 0xe31a7af544b899d3d48ac6e1118ce04897587f9262886cf3bf572e2207a432df
+
+Event: SendEventToCoinweb
+Signature: SendEventToCoinweb(uint8,bytes32,bytes,uint256,uint256)
+Topic Hash: 0xebf73ab862a8e5e1bf701c80cd465b69ca1a2de87e636366d6e3838ec99dc334
+
+Event: Transfer
+Signature: Transfer(address,address,uint256)
+Topic Hash: 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+Indexed Parameters:
+  address from (indexed)
+  address to (indexed)
+
+Event: Vote
+Signature: Vote(address,uint256,bool,uint256)
+Topic Hash: 0x65f8c50a40ae46ed6b244ba59b93d321216c9638f156760e7f851c2536a3add2
+Indexed Parameters:
+  address voter (indexed)
+

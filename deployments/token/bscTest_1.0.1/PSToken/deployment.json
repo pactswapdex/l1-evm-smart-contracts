@@ -1,0 +1,13 @@
+{
+  "network": "bscTest",
+  "chainId": "97",
+  "address": "0x1261C2292577b15B7B64585Ab41B7b7F40d05A2f",
+  "constructorArgs": [
+    "PactSwap",
+    "PS",
+    "100000000000000000000"
+  ],
+  "deploymentHash": "0x87bd578a45d203e78258b2ba3e942603dabba752344e4d82ee296e3cbf7ad193",
+  "blockNumber": 67312686,
+  "timestamp": "2025-10-01T14:47:10.398Z"
+}

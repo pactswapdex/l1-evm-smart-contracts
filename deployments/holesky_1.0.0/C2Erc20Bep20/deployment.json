@@ -1,0 +1,11 @@
+{
+  "network": "holesky",
+  "chainId": "17000",
+  "address": "0xA8184B8d06C15E447AbF8d2F78fFcD84259a98F2",
+  "constructorArgs": [
+    "0x3F1c547b21f65e10480dE3ad8E19fAAC46C95034"
+  ],
+  "deploymentHash": "0x6d318aacdb4f97c7bfec376a2b7d6ef72e1e92d666509866fae243c5d6198b24",
+  "blockNumber": 2790993,
+  "timestamp": "2024-11-22T11:10:39.002Z"
+}

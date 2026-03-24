@@ -1,0 +1,17 @@
+.env*
+!.env.yarn
+!.env.yarn.devnet
+
+
+# Hardhat
+cache
+artifacts
+cache-*
+artifacts-*
+typechain-types
+.env
+coverage
+coverage.json
+types
+types-*
+node_modules

@@ -1,0 +1,7 @@
+error E1();
+error E2();
+error E3();
+event I(uint256 indexed l);
+event T(uint256 indexed l, uint256 indexed n, address r, uint256 a, bytes d);
+function paidFor(uint256 l, address r) returns (uint256);
+function transfer(uint256 l, uint256 m, address r, bytes d);

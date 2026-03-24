@@ -1,0 +1,18 @@
+Event: Approval
+Signature: Approval(address,address,uint256)
+Topic Hash: 0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925
+Indexed Parameters:
+  address owner (indexed)
+  address spender (indexed)
+
+Event: EIP712DomainChanged
+Signature: EIP712DomainChanged()
+Topic Hash: 0x0a6387c9ea3628b88a633bb4f3b151770f70085117a15f9bf3787cda53f13d31
+
+Event: Transfer
+Signature: Transfer(address,address,uint256)
+Topic Hash: 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+Indexed Parameters:
+  address from (indexed)
+  address to (indexed)
+

@@ -1,0 +1,9 @@
+{
+  "network": "mainnet",
+  "chainId": "1",
+  "address": "0x5b50845B94fC47c6172d9ab90845D3613e36Aed5",
+  "constructorArgs": [],
+  "deploymentHash": "0x80734a23bda6cfd3e694a1a50fad02a82d83a8e5b5a413c825c685efd78a5e59",
+  "blockNumber": 21723341,
+  "timestamp": "2025-01-28T12:52:21.466Z"
+}

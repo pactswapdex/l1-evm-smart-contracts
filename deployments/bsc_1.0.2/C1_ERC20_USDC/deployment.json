@@ -1,0 +1,11 @@
+{
+  "network": "bsc",
+  "chainId": "56",
+  "address": "0x4e175B3Bc61e437af893b49c436235AC1137670f",
+  "constructorArgs": [
+    "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
+  ],
+  "deploymentHash": "0xef4b0f58b99a752bc028036622e140c17bc3819923fde5af2c7452964fc5c424",
+  "blockNumber": 81731353,
+  "timestamp": "2026-02-17T10:40:43.451Z"
+}
