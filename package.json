@@ -11,6 +11,7 @@
     "test:c1:reentrancy": "hardhat test __tests__/C1_EVM.reentrancy.spec.ts",
     "test:c1:stress": "hardhat test __tests__/C1_EVM.stress.ts __tests__/C1_ERC20_BEP20.stress.ts",
     "test:c1:all": "hardhat test __tests__/C1_EVM.ts __tests__/C1_ERC20_BEP20.ts __tests__/C1_EVM.fees.spec.ts __tests__/C1_ERC20_BEP20.fees.spec.ts __tests__/C1_EVM.reentrancy.spec.ts",
+    "test:gas": "hardhat test __tests__/C1_EVM.ts __tests__/C2_EVM.ts __tests__/C1_ERC20_BEP20.ts __tests__/C2_ERC20_BEP20.ts --grep Gas",
     "deploy:local": "hardhat run scripts/deploy.ts --network localhost",
     "deploy:holesky": "hardhat run scripts/deploy.ts --network holesky",
     "deploy:l1a": "hardhat run scripts/deploy.ts --network l1a",
