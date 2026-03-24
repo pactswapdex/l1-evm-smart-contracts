@@ -1,6 +1,32 @@
 import { expect } from "chai";
 import hre from "hardhat";
 
+/**
+ * Asserts C2 `transfer` does not succeed (EthRejector / failed ETH forward).
+ * Uses `transfer` + `wait()` and `.eventually.be.rejected` instead of `.to.revert(ethers)`
+ * on the raw tx promise, which can mis-handle the trailing `{ value }` overrides.
+ */
+async function expectC2TransferReverted(
+  c2evm: any,
+  l2LinkedId: bigint,
+  maxAllowedPayment: bigint,
+  to: string,
+  value: bigint
+) {
+  // chai-as-promised adds `.eventually` at runtime; default Chai types omit it.
+  await (expect(
+    (async () => {
+      const tx = await c2evm.transfer(l2LinkedId, maxAllowedPayment, to, "0x", {
+        value,
+      });
+      const receipt = await tx.wait();
+      if (receipt == null || receipt.status !== 1) {
+        throw new Error("expected revert");
+      }
+    })()
+  ) as any).to.eventually.be.rejected;
+}
+
 describe("C2_EVM with EthRejector as recipient", function () {
   let c2evm: any;
   let ethRejector: any;
@@ -30,11 +56,13 @@ describe("C2_EVM with EthRejector as recipient", function () {
 
       const initialBalance = await ethers.provider.getBalance(ethRejectorAddress);
 
-      await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
-          value: transferAmount,
-        })
-      ).to.revert(ethers);
+      await expectC2TransferReverted(
+        c2evm,
+        l2LinkedId,
+        maxAllowedPayment,
+        ethRejectorAddress,
+        transferAmount
+      );
 
       const finalBalance = await ethers.provider.getBalance(ethRejectorAddress);
       expect(finalBalance).to.equal(initialBalance);
@@ -52,11 +80,13 @@ describe("C2_EVM with EthRejector as recipient", function () {
       expect(paid).to.equal(0n);
 
       // Act - attempt transfer that will fail
-      await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
-          value: transferAmount,
-        })
-      ).to.revert(ethers);
+      await expectC2TransferReverted(
+        c2evm,
+        l2LinkedId,
+        maxAllowedPayment,
+        ethRejectorAddress,
+        transferAmount
+      );
 
       // Assert - payment tracking should remain unchanged
       paid = await c2evm.paidFor(l2LinkedId, ethRejectorAddress);
@@ -75,11 +105,13 @@ describe("C2_EVM with EthRejector as recipient", function () {
       expect(nonce).to.equal(0n);
 
       // Act - attempt transfer that will fail
-      await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
-          value: transferAmount,
-        })
-      ).to.revert(ethers);
+      await expectC2TransferReverted(
+        c2evm,
+        l2LinkedId,
+        maxAllowedPayment,
+        ethRejectorAddress,
+        transferAmount
+      );
 
       // Assert - nonce should remain unchanged
       nonce = await c2evm.getNonce(l2LinkedId, ethRejectorAddress);
@@ -94,14 +126,15 @@ describe("C2_EVM with EthRejector as recipient", function () {
       const ethRejectorAddress = await ethRejector.getAddress();
 
       // Act & Assert - should revert without emitting event
-      await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
-          value: transferAmount,
-        })
-      ).to.revert(ethers);
-      
+      await expectC2TransferReverted(
+        c2evm,
+        l2LinkedId,
+        maxAllowedPayment,
+        ethRejectorAddress,
+        transferAmount
+      );
+
       // Verify no event was emitted (transaction reverted, so no event)
-      // We can't use .and.not.to.emit() with revertedWithCustomError, so we verify separately
     });
 
     it("Should handle multiple failed transfer attempts to EthRejector", async function () {
@@ -112,23 +145,29 @@ describe("C2_EVM with EthRejector as recipient", function () {
       const ethRejectorAddress = await ethRejector.getAddress();
 
       // Act - attempt multiple transfers that will all fail
-      await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
-          value: transferAmount,
-        })
-      ).to.revert(ethers);
+      await expectC2TransferReverted(
+        c2evm,
+        l2LinkedId,
+        maxAllowedPayment,
+        ethRejectorAddress,
+        transferAmount
+      );
 
-      await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
-          value: transferAmount,
-        })
-      ).to.revert(ethers);
+      await expectC2TransferReverted(
+        c2evm,
+        l2LinkedId,
+        maxAllowedPayment,
+        ethRejectorAddress,
+        transferAmount
+      );
 
-      await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
-          value: transferAmount,
-        })
-      ).to.revert(ethers);
+      await expectC2TransferReverted(
+        c2evm,
+        l2LinkedId,
+        maxAllowedPayment,
+        ethRejectorAddress,
+        transferAmount
+      );
 
       // Assert - state should remain unchanged
       const paid = await c2evm.paidFor(l2LinkedId, ethRejectorAddress);
@@ -145,11 +184,13 @@ describe("C2_EVM with EthRejector as recipient", function () {
       const ethRejectorAddress = await ethRejector.getAddress();
 
       // Act & Assert - should still revert
-      await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
-          value: transferAmount,
-        })
-      ).to.revert(ethers);
+      await expectC2TransferReverted(
+        c2evm,
+        l2LinkedId,
+        maxAllowedPayment,
+        ethRejectorAddress,
+        transferAmount
+      );
     });
   });
 
@@ -183,11 +224,13 @@ describe("C2_EVM with EthRejector as recipient", function () {
       const ethRejectorAddress = await ethRejector.getAddress();
 
       // Act & Assert - should fail for EthRejector
-      await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
-          value: transferAmount,
-        })
-      ).to.revert(ethers);
+      await expectC2TransferReverted(
+        c2evm,
+        l2LinkedId,
+        maxAllowedPayment,
+        ethRejectorAddress,
+        transferAmount
+      );
 
       // Act & Assert - should succeed for normal recipient
       await expect(
@@ -222,4 +265,3 @@ describe("C2_EVM with EthRejector as recipient", function () {
     });
   });
 });
-
