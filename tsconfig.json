@@ -10,6 +10,6 @@
     "moduleResolution": "nodenext",
     "types": ["mocha", "chai", "node"]
   },
-  "include": ["./scripts", "./test", "./typechain-types"],
+  "include": ["./scripts", "./__tests__", "./typechain-types"],
   "files": ["./hardhat.config.ts"]
 }

@@ -16,6 +16,12 @@ const config: HardhatUserConfig = {
   paths: {
     artifacts: process.env.HARDHAT_ARTIFACTS_DIR ?? 'artifacts',
     cache: process.env.HARDHAT_CACHE_DIR ?? 'cache',
+    // Mocha: TS specs under __tests__/. Solidity tests only under __tests__/solidity/
+    // so archived .sol under __tests__/__token__deprecated__ is not scanned as tests.
+    tests: {
+      mocha: '__tests__',
+      solidity: '__tests__/solidity',
+    },
   },
   /**
    * @dev TypeChain output directory (generated TS bindings).
