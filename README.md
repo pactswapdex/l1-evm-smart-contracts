@@ -33,7 +33,7 @@ Cross-chain–aware **L1 transfer helpers** and related token utilities for PACT
 
 ### Per-asset L1 addresses (env: `L1_CONTRACT_ADDRESS_BASE` / `L1_CONTRACT_ADDRESS_MAKER`)
 
-These match the v1.0.2 deployment records under `deployments/` (C1 ↔ BASE, C2 ↔ MAKER). Assets that only list L2 IDs in ops env (e.g. BTC, LTC, DOGE) are omitted here.
+These match the v1.0.2 deployment records under `deployments/` (C1 ↔ BASE, C2 ↔ MAKER). **Wrapped BTC** uses the `C1_ERC20_WBTC` / `C2_ERC20_WBTC` helpers as **`WBTC_ETH`** (Ethereum) and **`WBTC_BNB`** (BNB Smart Chain)—both are listed below.
 
 | Asset key | Network | Chain ID | L1 base (C1) | L1 maker (C2) |
 |-----------|---------|----------|--------------|---------------|
@@ -45,6 +45,7 @@ These match the v1.0.2 deployment records under `deployments/` (C1 ↔ BASE, C2 
 | USDT_BNB | BNB Smart Chain | 56 | `0x3ea9D2b102f9f7995Aa9dfc20C0b2E6A684617A9` | `0x21F5dE8e4758803ECbD364617c6ae6d503111c10` |
 | USDT_TRX | Tron | 728126428 | `TBEK242nwxhhtPV4ejrPLmNWFce7FWBouf` | `TNTD343aLLjWsHd2JqxoWTxiRs8tCw8MpK` |
 | WBTC_ETH | Ethereum | 1 | `0xb96112DB705Bd19ECa6Ca038501270EDB290F805` | `0x4e175B3Bc61e437af893b49c436235AC1137670f` |
+| WBTC_BNB | BNB Smart Chain | 56 | `0x9036A48c6c9d00FafD98A9C4E3184C9b31Fce892` | `0x15a9112F8C1B12d6a888ed32178e86F979B4D5aD` |
 | USDC_ETH | Ethereum | 1 | `0x263FdC256E0E36D8dD5eAc1C0911Cc685eeDC8c3` | `0x124009934c61bC495653C5Ef314a3D0E2b102E09` |
 | USDC_BNB | BNB Smart Chain | 56 | `0x4e175B3Bc61e437af893b49c436235AC1137670f` | `0x199A7EBa2cEa0D47A22D1500D469DDdFC47C57FC` |
 | USD1_ETH | Ethereum | 1 | `0x199A7EBa2cEa0D47A22D1500D469DDdFC47C57FC` | `0x9036A48c6c9d00FafD98A9C4E3184C9b31Fce892` |
