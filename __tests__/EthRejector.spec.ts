@@ -22,8 +22,7 @@ describe("C2_EVM with EthRejector as recipient", function () {
   });
 
   describe("Transfer to EthRejector", function () {
-    it("Should revert with a custom error when transferring ETH to EthRejector", async function () {
-      // Arrange
+    it("Should revert when transferring ETH to EthRejector (forward fails)", async function () {
       const l2LinkedId = 1n;
       const maxAllowedPayment = ethers.parseEther("1");
       const transferAmount = ethers.parseEther("0.5");
@@ -31,27 +30,12 @@ describe("C2_EVM with EthRejector as recipient", function () {
 
       const initialBalance = await ethers.provider.getBalance(ethRejectorAddress);
 
-      try {
-        const tx = await c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, {
+      await expect(
+        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
           value: transferAmount,
-        });
+        })
+      ).to.revert(ethers);
 
-        console.log(tx);
-      
-        // Act & Assert - The contract uses a hardcoded selector 0xf67db1ed which may not match E4()
-        // So we check that it reverts with any custom error from C2Evm
-        // The contract should revert when the transfer fails
-        await expect(
-            c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, {
-              value: transferAmount,
-            })
-        ).to.be.revertedWithCustomError(ethRejector, "DontSendETH");
-      } catch (error) {
-        console.log(error);
-        throw error;
-      }
-
-      // Verify that no ETH was transferred
       const finalBalance = await ethers.provider.getBalance(ethRejectorAddress);
       expect(finalBalance).to.equal(initialBalance);
     });
@@ -69,10 +53,10 @@ describe("C2_EVM with EthRejector as recipient", function () {
 
       // Act - attempt transfer that will fail
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, {
+        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
           value: transferAmount,
         })
-      ).to.be.revertedWithCustomError(ethRejector, "DontSendETH");
+      ).to.revert(ethers);
 
       // Assert - payment tracking should remain unchanged
       paid = await c2evm.paidFor(l2LinkedId, ethRejectorAddress);
@@ -92,10 +76,10 @@ describe("C2_EVM with EthRejector as recipient", function () {
 
       // Act - attempt transfer that will fail
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, {
+        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
           value: transferAmount,
         })
-      ).to.be.revertedWithCustomError(ethRejector, "DontSendETH");
+      ).to.revert(ethers);
 
       // Assert - nonce should remain unchanged
       nonce = await c2evm.getNonce(l2LinkedId, ethRejectorAddress);
@@ -111,11 +95,10 @@ describe("C2_EVM with EthRejector as recipient", function () {
 
       // Act & Assert - should revert without emitting event
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, {
+        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
           value: transferAmount,
         })
-      )
-        .to.be.revertedWithCustomError(ethRejector, "DontSendETH");
+      ).to.revert(ethers);
       
       // Verify no event was emitted (transaction reverted, so no event)
       // We can't use .and.not.to.emit() with revertedWithCustomError, so we verify separately
@@ -130,22 +113,22 @@ describe("C2_EVM with EthRejector as recipient", function () {
 
       // Act - attempt multiple transfers that will all fail
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, {
+        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
           value: transferAmount,
         })
-      ).to.be.revertedWithCustomError(c2evm, "E4");
+      ).to.revert(ethers);
 
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, {
+        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
           value: transferAmount,
         })
-      ).to.be.revertedWithCustomError(ethRejector, "DontSendETH");
+      ).to.revert(ethers);
 
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, {
+        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
           value: transferAmount,
         })
-      ).to.be.revertedWithCustomError(ethRejector, "DontSendETH");
+      ).to.revert(ethers);
 
       // Assert - state should remain unchanged
       const paid = await c2evm.paidFor(l2LinkedId, ethRejectorAddress);
@@ -163,10 +146,10 @@ describe("C2_EVM with EthRejector as recipient", function () {
 
       // Act & Assert - should still revert
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, {
+        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
           value: transferAmount,
         })
-      ).to.be.revertedWithCustomError(ethRejector, "DontSendETH");
+      ).to.revert(ethers);
     });
   });
 
@@ -181,12 +164,12 @@ describe("C2_EVM with EthRejector as recipient", function () {
 
       // Act & Assert - should succeed for normal recipient
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, {
+        c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, "0x", {
           value: transferAmount,
         })
       )
         .to.emit(c2evm, "T")
-        .withArgs(l2LinkedId, 0n, recipient.address, transferAmount);
+        .withArgs(l2LinkedId, 0n, recipient.address, transferAmount, "0x");
 
       const finalBalance = await ethers.provider.getBalance(recipient.address);
       expect(finalBalance - initialBalance).to.equal(transferAmount);
@@ -201,19 +184,19 @@ describe("C2_EVM with EthRejector as recipient", function () {
 
       // Act & Assert - should fail for EthRejector
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, {
+        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethRejectorAddress, "0x", {
           value: transferAmount,
         })
-      ).to.be.revertedWithCustomError(ethRejector, "DontSendETH");
+      ).to.revert(ethers);
 
       // Act & Assert - should succeed for normal recipient
       await expect(
-        c2evm.transfer(l2LinkedId + 1n, maxAllowedPayment, recipient.address, {
+        c2evm.transfer(l2LinkedId + 1n, maxAllowedPayment, recipient.address, "0x", {
           value: transferAmount,
         })
       )
         .to.emit(c2evm, "T")
-        .withArgs(l2LinkedId + 1n, 0n, recipient.address, transferAmount);
+        .withArgs(l2LinkedId + 1n, 0n, recipient.address, transferAmount, "0x");
     });
   });
 

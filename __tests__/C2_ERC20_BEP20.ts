@@ -45,9 +45,9 @@ describe('C2_ERC20_BEP20', function () {
 
       const initialBalance = await mockToken.balanceOf(recipient.address);
 
-      await expect(c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount))
+      await expect(c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount, '0x'))
         .to.emit(c2erc20, 'T')
-        .withArgs(l2LinkedId, 0n, recipient.address, transferAmount);
+        .withArgs(l2LinkedId, 0n, recipient.address, transferAmount, '0x');
 
       expect(await mockToken.balanceOf(recipient.address)).to.equal(initialBalance + transferAmount);
     });
@@ -57,12 +57,12 @@ describe('C2_ERC20_BEP20', function () {
       const maxAllowedPayment = ethers.parseEther('1');
       const transferAmount = ethers.parseEther('0.3');
 
-      await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount);
+      await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount, '0x');
 
       let paid = await c2erc20.paidFor(l2LinkedId, recipient.address);
       expect(paid).to.equal(transferAmount);
 
-      await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount);
+      await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount, '0x');
 
       paid = await c2erc20.paidFor(l2LinkedId, recipient.address);
       expect(paid).to.equal(transferAmount * 2n);
@@ -73,29 +73,29 @@ describe('C2_ERC20_BEP20', function () {
       const maxAllowedPayment = ethers.parseEther('1');
       const transferAmount = ethers.parseEther('0.1');
 
-      await expect(c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount))
+      await expect(c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount, '0x'))
         .to.emit(c2erc20, 'T')
-        .withArgs(l2LinkedId, 0n, recipient.address, transferAmount);
+        .withArgs(l2LinkedId, 0n, recipient.address, transferAmount, '0x');
 
-      await expect(c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount))
+      await expect(c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount, '0x'))
         .to.emit(c2erc20, 'T')
-        .withArgs(l2LinkedId, 1n, recipient.address, transferAmount);
+        .withArgs(l2LinkedId, 1n, recipient.address, transferAmount, '0x');
 
-      await expect(c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount))
+      await expect(c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount, '0x'))
         .to.emit(c2erc20, 'T')
-        .withArgs(l2LinkedId, 2n, recipient.address, transferAmount);
+        .withArgs(l2LinkedId, 2n, recipient.address, transferAmount, '0x');
 
-      await expect(c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount))
+      await expect(c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount, '0x'))
         .to.emit(c2erc20, 'T')
-        .withArgs(l2LinkedId, 3n, recipient.address, transferAmount);
+        .withArgs(l2LinkedId, 3n, recipient.address, transferAmount, '0x');
 
-      await expect(c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount))
+      await expect(c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount, '0x'))
         .to.emit(c2erc20, 'T')
-        .withArgs(l2LinkedId, 4n, recipient.address, transferAmount);
+        .withArgs(l2LinkedId, 4n, recipient.address, transferAmount, '0x');
     });
 
     it('Should revert on payment below minimum', async function () {
-      await expect(c2erc20.transfer(1n, ethers.parseEther('1'), recipient.address, 0)).to.be.revertedWithCustomError(
+      await expect(c2erc20.transfer(1n, ethers.parseEther('1'), recipient.address, 0, '0x')).to.be.revertedWithCustomError(
         c2erc20,
         'E2'
       );
@@ -105,10 +105,10 @@ describe('C2_ERC20_BEP20', function () {
       const maxAllowedPayment = ethers.parseEther('0.5');
       const transferAmount = ethers.parseEther('0.3');
 
-      await c2erc20.transfer(1n, maxAllowedPayment, recipient.address, transferAmount);
+      await c2erc20.transfer(1n, maxAllowedPayment, recipient.address, transferAmount, '0x');
 
       await expect(
-        c2erc20.transfer(1n, maxAllowedPayment, recipient.address, transferAmount)
+        c2erc20.transfer(1n, maxAllowedPayment, recipient.address, transferAmount, '0x')
       ).to.be.revertedWithCustomError(c2erc20, 'E3');
     });
 
@@ -132,8 +132,8 @@ describe('C2_ERC20_BEP20', function () {
       const maxAllowedPayment = ethers.parseEther('1');
       const transferAmount = ethers.parseEther('0.3');
 
-      await c2erc20.transfer(1n, maxAllowedPayment, recipient.address, transferAmount);
-      await c2erc20.transfer(2n, maxAllowedPayment, recipient.address, transferAmount);
+      await c2erc20.transfer(1n, maxAllowedPayment, recipient.address, transferAmount, '0x');
+      await c2erc20.transfer(2n, maxAllowedPayment, recipient.address, transferAmount, '0x');
 
       expect(await c2erc20.paidFor(1n, recipient.address)).to.equal(transferAmount);
       expect(await c2erc20.paidFor(2n, recipient.address)).to.equal(transferAmount);
@@ -146,19 +146,19 @@ describe('C2_ERC20_BEP20', function () {
       const maxAllowedPayment = ethers.parseEther('1');
       const transferAmount = ethers.parseEther('0.1');
 
-      const tx1 = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount);
+      const tx1 = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount, '0x');
       const receipt1 = await tx1.wait();
       console.log('Gas used (cold storage):', receipt1?.gasUsed);
 
-      const tx2 = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount);
+      const tx2 = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount, '0x');
       const receipt2 = await tx2.wait();
       console.log('Gas used (warm storage):', receipt2?.gasUsed);
 
-      const tx3 = await c2erc20.transfer(2n, maxAllowedPayment, recipient.address, transferAmount);
+      const tx3 = await c2erc20.transfer(2n, maxAllowedPayment, recipient.address, transferAmount, '0x');
       const receipt3 = await tx3.wait();
       console.log('Gas used (new storage slot):', receipt3?.gasUsed);
 
-      const tx4 = await c2erc20.transfer(3n, transferAmount, recipient.address, transferAmount);
+      const tx4 = await c2erc20.transfer(3n, transferAmount, recipient.address, transferAmount, '0x');
       const receipt4 = await tx4.wait();
       console.log('Gas used (storage cleanup):', receipt4?.gasUsed);
     });
@@ -170,7 +170,7 @@ describe('C2_ERC20_BEP20', function () {
       const maxAllowedPayment = ethers.parseEther('1');
       const transferAmount = ethers.parseEther('0.3');
 
-      await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount);
+      await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount, '0x');
       expect(await c2erc20.paidFor(l2LinkedId, recipient.address)).to.equal(transferAmount);
     });
 
@@ -179,7 +179,7 @@ describe('C2_ERC20_BEP20', function () {
       const maxAllowedPayment = ethers.parseEther('1');
       const transferAmount = ethers.parseEther('0.3');
 
-      await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount);
+      await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, transferAmount, '0x');
       expect(await c2erc20.getNonce(l2LinkedId, recipient.address)).to.equal(1);
     });
   });
