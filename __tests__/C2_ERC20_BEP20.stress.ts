@@ -64,7 +64,7 @@ describe('C2_ERC20_BEP20 Stress Tests', function () {
       const maxAllowedPayment = scenario.value * 2n;
 
       try {
-        const tx = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, scenario.value, {
+        const tx = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, scenario.value, '0x', {
           gasLimit: 150000,
         });
 
@@ -152,7 +152,7 @@ describe('C2_ERC20_BEP20 Stress Tests', function () {
         concurrentPromises.push(
           (async () => {
             try {
-              const tx = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, value, {
+              const tx = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, value, '0x', {
                 gasLimit: 150000,
               });
               const receipt = await tx.wait();
@@ -193,7 +193,7 @@ describe('C2_ERC20_BEP20 Stress Tests', function () {
 
       try {
         // First transfer to reach maxAllowedPayment
-        const tx = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, value, {
+        const tx = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, value, '0x', {
           gasLimit: 150000,
         });
         const receipt = await tx.wait();

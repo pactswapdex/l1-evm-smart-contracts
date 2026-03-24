@@ -47,6 +47,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
+        '0x',
         { value: settlementAmount }
       );
       
@@ -85,6 +86,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
+        '0x',
         { value: ethers.parseEther("1") }
       );
       
@@ -95,6 +97,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
+        '0x',
         { value: ethers.parseEther("1") }
       );
       
@@ -120,6 +123,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
+        '0x',
         { value: ethers.parseEther("1") }
       );
       
@@ -129,6 +133,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
           l2LinkedId,
           maxPayment,
           maliciousUserAddress,
+          '0x',
           { value: ethers.parseEther("0.6") }
         )
       ).to.be.revertedWithCustomError(c2Evm, "E3"); // Overpayment
@@ -154,6 +159,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
+        '0x',
         { value: ethers.parseEther("1.5") }
       );
       
@@ -176,6 +182,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
+        '0x',
         { value: ethers.parseEther("1") }
       );
       
@@ -183,6 +190,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
+        '0x',
         { value: ethers.parseEther("1") }
       );
       
@@ -190,6 +198,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
+        '0x',
         { value: ethers.parseEther("1") }
       );
       
@@ -221,6 +230,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
+        '0x',
         { value: ethers.parseEther("5") }
       );
       
@@ -247,6 +257,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedId,
         maxPayment,
         normalUserAddress,
+        '0x',
         { value: ethers.parseEther("3") }
       );
       
@@ -273,6 +284,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedId,
         maxPayment,
         normalUser.address,
+        '0x',
         { value: ethers.parseEther("2") }
       );
       
@@ -281,6 +293,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedId,
         maxPayment,
         normalUser.address,
+        '0x',
         { value: ethers.parseEther("1") }
       );
       
@@ -310,6 +323,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedIdNormal,
         maxPayment,
         normalUser.address,
+        '0x',
         { value: ethers.parseEther("2") }
       );
       
@@ -318,6 +332,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         l2LinkedIdMalicious,
         maxPayment,
         maliciousUserAddress,
+        '0x',
         { value: ethers.parseEther("2") }
       );
       
@@ -349,6 +364,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
           l2LinkedId,
           maxPayment,
           maliciousUserAddress,
+          '0x',
           { value: settlementAmount }
         )
       ).to.emit(c2Evm, "T")
@@ -356,7 +372,8 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
           l2LinkedId,
           0n, // nonce = 0 (first settlement)
           maliciousUserAddress,
-          settlementAmount
+          settlementAmount,
+          '0x'
         );
       
       // Event should be emitted exactly once, not multiple times from reentrancy

@@ -53,7 +53,7 @@ describe('C2_EVM Stress Tests', function () {
       const maxAllowedPayment = scenario.value * 2n;
 
       try {
-        const tx = await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, {
+        const tx = await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
           value: scenario.value,
           gasLimit: 100000,
         });
@@ -132,7 +132,7 @@ describe('C2_EVM Stress Tests', function () {
         concurrentPromises.push(
           (async () => {
             try {
-              const tx = await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, {
+              const tx = await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
                 value,
                 gasLimit: 100000,
               });
@@ -178,7 +178,7 @@ describe('C2_EVM Stress Tests', function () {
         const maxAllowedPayment = value * 2n;
 
         try {
-          const tx = await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, {
+          const tx = await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
             value,
             gasLimit: 100000,
           });

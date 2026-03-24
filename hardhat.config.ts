@@ -124,7 +124,8 @@ const config: HardhatUserConfig = {
   },
   verify: {
     etherscan: {
-      apiKey: process.env.ETHERSCAN_API_KEY,
+      // Empty string satisfies Hardhat config validation; set ETHERSCAN_API_KEY when using verify.
+      apiKey: process.env.ETHERSCAN_API_KEY ?? '',
     },
   },
   // gasReporter: {
