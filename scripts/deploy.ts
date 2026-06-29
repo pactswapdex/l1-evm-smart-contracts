@@ -47,7 +47,10 @@ const TOKENS: Record<string, { name: string; address: string }[]> = {
     { name: 'USDT', address: '0x55d398326f99059fF775485246999027B3197955' },
     // { name: 'WBTC', address: '0x0555E30da8f98308EdB960aa94C0Db47230d2B9c' },
   ],
-  polygon: [{ name: 'USDT', address: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F' }],
+  polygon: [
+    { name: 'USDT', address: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F' },
+    { name: 'USDC', address: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359' },
+  ],
   holesky: [{ name: 'TEST', address: '0x3F1c547b21f65e10480dE3ad8E19fAAC46C95034' }],
   l1a: [{ name: 'L1A_TOKEN', address: '0x9596261b59746D4fb1D1475491Def89325842868' }],
   l1b: [{ name: 'L1B_TOKEN', address: '0x6e00389D89B8A85cAc7f0891300E28020D868F52' }],
