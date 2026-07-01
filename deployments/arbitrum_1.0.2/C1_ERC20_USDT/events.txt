@@ -1,0 +1,19 @@
+Event: FeePaid
+Signature: FeePaid(uint256,address,uint256)
+Topic Hash: 0x6fe296e805108cd514fea415210be4016149b01eeb08effbe130951b6a5f6c0b
+Indexed Parameters:
+  uint256 l2LinkedId (indexed)
+
+Event: LinkedId
+Signature: LinkedId(uint256)
+Topic Hash: 0x4d92d6635d0dd96745c29fa9f977d11c65a9ff59a725e6ea9666c04f1aeac68b
+Indexed Parameters:
+  uint256 l2LinkedId (indexed)
+
+Event: Transfer
+Signature: Transfer(uint256,uint256,address,uint256,bytes)
+Topic Hash: 0x248dab06fb4e9f81edd7105d1c2e28a5385b74177ac5ab394a069133337d3fb6
+Indexed Parameters:
+  uint256 l2LinkedId (indexed)
+  uint256 nonce (indexed)
+

@@ -19,6 +19,8 @@
     "deploy:bsc": "hardhat run scripts/deploy.ts --network bsc",
     "deploy:mainnet": "hardhat run scripts/deploy.ts --network mainnet",
     "deploy:polygon": "hardhat run scripts/deploy.ts --network polygon",
+    "deploy:arbitrum": "hardhat run scripts/deploy.ts --network arbitrum",
+    "deploy:base": "hardhat run scripts/deploy.ts --network base",
     "deploy:tron": "npx tsx scripts/deploy-tron.ts",
     "deploy:bscTest:token": "hardhat run scripts/deploy-token.ts --network bscTest",
     "deploy:l1a:token": "hardhat run scripts/deploy-token.ts --network l1a",

@@ -1,0 +1,15 @@
+error ExceedsMaxNonce();
+error ExceedsMaxPayment();
+error InsufficientAmountForFees();
+error InvalidFeeRecipient();
+error InvalidRecipientOrAmount();
+error ReentrancyGuardReentrantCall();
+error SafeERC20FailedOperation(address token);
+error ZeroTokenAddress();
+event FeePaid(uint256 indexed l2LinkedId, address feeRecipient, uint256 amount);
+event LinkedId(uint256 indexed l2LinkedId);
+event Transfer(uint256 indexed l2LinkedId, uint256 indexed nonce, address recipient, uint256 amount, bytes data);
+function getNonce(uint256 l2LinkedId) returns (uint256);
+function paidFor(uint256 l2LinkedId, address recipient) returns (uint256);
+function token() returns (address);
+function transfer(uint256 l2LinkedId, uint256 maxPayment, uint256 maxNonce, address recipient, uint256 amount, bytes data, tuple[] fees);

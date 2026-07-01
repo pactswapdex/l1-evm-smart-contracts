@@ -54,6 +54,15 @@ const TOKENS: Record<string, { name: string; address: string }[]> = {
   holesky: [{ name: 'TEST', address: '0x3F1c547b21f65e10480dE3ad8E19fAAC46C95034' }],
   l1a: [{ name: 'L1A_TOKEN', address: '0x9596261b59746D4fb1D1475491Def89325842868' }],
   l1b: [{ name: 'L1B_TOKEN', address: '0x6e00389D89B8A85cAc7f0891300E28020D868F52' }],
+  arbitrum: [
+    { name: 'ARB_TOKEN', address: '0x912CE59144191C1204E64559FE8253a0e49E6548' },
+    { name: 'USDT', address: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9' },
+    { name: 'USDC', address: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831' },
+  ],
+  base: [
+    { name: 'USDT', address: '0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2' },
+    { name: 'USDC', address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913' },
+  ],
 };
 
 // ============================================================
