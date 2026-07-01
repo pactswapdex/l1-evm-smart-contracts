@@ -121,10 +121,24 @@ const config: HardhatUserConfig = {
       url: 'https://bor.coinhq.store',
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
+    arbitrum: {
+      type: 'http',
+      url: 'https://arb1.lava.build',
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
+    base: {
+      type: 'http',
+      url: 'https://base-mainnet.public.blastapi.io',
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
   },
   verify: {
     etherscan: {
       // Empty string satisfies Hardhat config validation; set ETHERSCAN_API_KEY when using verify.
+      apiKey: process.env.ETHERSCAN_API_KEY ?? '',
+    },
+    // @ts-ignore
+    basescan: {
       apiKey: process.env.ETHERSCAN_API_KEY ?? '',
     },
   },

@@ -32,6 +32,8 @@ Cross-chain–aware **L1 transfer helpers** and related token utilities for PACT
 
 - **BNB Smart Chain Mainnet** (Chain ID: **56**)
 - **Ethereum Mainnet** (Chain ID: **1**)
+- **Arbitrum One** (Chain ID: **42161**)
+- **Base** (Chain ID: **8453**)
 - **Polygon PoS Mainnet** (Chain ID: **137**)
 - **Tron Mainnet** (native **T**-style addresses; JSON-RPC tooling often uses chain ID **728126428**)
 - **Coinweb L1a devnet** (Chain ID: **1892**)
@@ -61,13 +63,29 @@ Cross-chain–aware **L1 transfer helpers** and related token utilities for PACT
 | **C2_EVM** (core) | `0xc9560d92bE095248df7df6d69e827A25Bdc089Ec` |
 | **ERC20 helpers** | USDT, WBTC, USDC, USD1 |
 
+#### Arbitrum One — Chain ID `42161`
+
+| Role | Address |
+| :-- | :-- |
+| **C1_EVM** (core) | `0x7F0055241779898b7aE8325217F690C843AfdD84` |
+| **C2_EVM** (core) | `0x5b50845B94fC47c6172d9ab90845D3613e36Aed5` |
+| **ERC20 helpers** | USDT, USDC, ARB |
+
+#### Base — Chain ID `8453`
+
+| Role | Address |
+| :-- | :-- |
+| **C1_EVM** (core) | `0x7F0055241779898b7aE8325217F690C843AfdD84` |
+| **C2_EVM** (core) | `0x5b50845B94fC47c6172d9ab90845D3613e36Aed5` |
+| **ERC20 helpers** | USDT, USDC |
+
 #### Polygon — Chain ID `137`
 
 | Role | Address |
 | :-- | :-- |
 | **C1_EVM** (core) | `0x5b50845B94fC47c6172d9ab90845D3613e36Aed5` |
 | **C2_EVM** (core) | `0xe6D28e11e2D65439343551127D51770f079a3427` |
-| **ERC20 helpers** | USDT |
+| **ERC20 helpers** | USDT, USDC |
 
 #### Tron — Chain ID `728126428`
 
@@ -119,11 +137,30 @@ Env: **`L1_CONTRACT_ADDRESS_BASE`** (C1) / **`L1_CONTRACT_ADDRESS_MAKER`** (C2).
 | USDC_BNB | **C1** `0x4e175B3Bc61e437af893b49c436235AC1137670f`<br>**C2** `0x199A7EBa2cEa0D47A22D1500D469DDdFC47C57FC` |
 | USD1_BNB | **C1** `0xCbe7165C817441638E2B9E38d1FC72fBD3C34a02`<br>**C2** `0xb96112DB705Bd19ECa6Ca038501270EDB290F805` |
 
+#### Arbitrum One (`42161`)
+
+| Asset | L1 (C1 base / C2 maker) |
+| :-- | :-- |
+| ETH | **C1** `0x7F0055241779898b7aE8325217F690C843AfdD84`<br>**C2** `0x5b50845B94fC47c6172d9ab90845D3613e36Aed5` |
+| USDT_ARB | **C1** `0x1515982B1031156e437c6BfA5ea763AA54a0b294`<br>**C2** `0x4E0641647b4Bb75B0ecfd136a436C4cE09Fc296A` |
+| USDC_ARB | **C1** `0x1590064c6cF4d6BC1476780e2A77D7DC022e1e57`<br>**C2** `0x371b5eBEadf34Da576E3E604b70f8580EF383476` |
+| ARB | **C1** `0xe6D28e11e2D65439343551127D51770f079a3427`<br>**C2** `0x81b6711C0AeA07a60f65e92a5678c516d84cA467` |
+
+#### Base (`8453`)
+
+| Asset | L1 (C1 base / C2 maker) |
+| :-- | :-- |
+| ETH | **C1** `0x7F0055241779898b7aE8325217F690C843AfdD84`<br>**C2** `0x5b50845B94fC47c6172d9ab90845D3613e36Aed5` |
+| USDT_BASE | **C1** `0xe6D28e11e2D65439343551127D51770f079a3427`<br>**C2** `0x81b6711C0AeA07a60f65e92a5678c516d84cA467` |
+| USDC_BASE | **C1** `0x1515982B1031156e437c6BfA5ea763AA54a0b294`<br>**C2** `0x4E0641647b4Bb75B0ecfd136a436C4cE09Fc296A` |
+
 #### Polygon (`137`)
 
 | Asset | L1 (C1 base / C2 maker) |
 | :-- | :-- |
 | POL | **C1** `0x5b50845B94fC47c6172d9ab90845D3613e36Aed5`<br>**C2** `0xe6D28e11e2D65439343551127D51770f079a3427` |
+| USDT_POL | **C1** `0x81b6711C0AeA07a60f65e92a5678c516d84cA467`<br>**C2** `0x1515982B1031156e437c6BfA5ea763AA54a0b294` |
+| USDC_POL | **C1** `0x4E0641647b4Bb75B0ecfd136a436C4cE09Fc296A`<br>**C2** `0x1590064c6cF4d6BC1476780e2A77D7DC022e1e57` |
 
 #### Tron (`728126428`)
 
@@ -144,6 +181,8 @@ All **v1.0.2** deployment outputs are grouped by network under `deployments/<net
 | :-- | :-- |
 | Ethereum · chain **1** | [`deployments/mainnet_1.0.2/`](deployments/mainnet_1.0.2/) |
 | BNB Smart Chain · **56** | [`deployments/bsc_1.0.2/`](deployments/bsc_1.0.2/) |
+| Arbitrum · **42161** | [`deployments/arbitrum_1.0.2/`](deployments/arbitrum_1.0.2/) |
+| Base · **8453** | [`deployments/base_1.0.2/`](deployments/base_1.0.2/) |
 | Polygon · **137** | [`deployments/polygon_1.0.2/`](deployments/polygon_1.0.2/) |
 | Tron · **728126428** | [`deployments/tron_1.0.2/`](deployments/tron_1.0.2/) |
 | L1a devnet · **1892** | [`deployments/l1a_1.0.2/`](deployments/l1a_1.0.2/) |
@@ -153,7 +192,9 @@ All **v1.0.2** deployment outputs are grouped by network under `deployments/<net
 
 - **Ethereum:** `C1_EVM`, `C2_EVM`, `C1_ERC20_WCWEB`, `C2_ERC20_WCWEB`, `C1_ERC20_USDC`, `C2_ERC20_USDC`, `C1_ERC20_USDT`, `C2_ERC20_USDT`, `C1_ERC20_WBTC`, `C2_ERC20_WBTC`, `C1_ERC20_USD1`, `C2_ERC20_USD1`
 - **BNB Smart Chain:** `C1_EVM`, `C2_EVM`, `C1_ERC20_USDT`, `C2_ERC20_USDT`, `C1_ERC20_WBTC`, `C2_ERC20_WBTC`, `C1_ERC20_USDC`, `C2_ERC20_USDC`, `C1_ERC20_USD1`, `C2_ERC20_USD1`
-- **Polygon:** `C1_EVM`, `C2_EVM`, `C1_ERC20_USDT`, `C2_ERC20_USDT`
+- **Arbitrum:** `C1_EVM`, `C2_EVM`, `C1_ERC20_USDT`, `C2_ERC20_USDT`, `C1_ERC20_USDC`, `C2_ERC20_USDC`, `C1_ERC20_ARB_TOKEN`, `C2_ERC20_ARB_TOKEN`
+- **Base:** `C1_EVM`, `C2_EVM`, `C1_ERC20_USDT`, `C2_ERC20_USDT`, `C1_ERC20_USDC`, `C2_ERC20_USDC`
+- **Polygon:** `C1_EVM`, `C2_EVM`, `C1_ERC20_USDT`, `C2_ERC20_USDT`, `C1_ERC20_USDC`, `C2_ERC20_USDC`
 - **Tron:** `C1_EVM`, `C2_EVM`, `C1_ERC20_USDT`, `C2_ERC20_USDT`
 - **L1a:** `C1Evm`, `C1Erc20Bep20` (folders: `C1Evm/`, `C1Erc20Bep20/`)
 - **L1b:** `C1Evm`, `C1Erc20Bep20`
@@ -189,7 +230,7 @@ On **L1a / L1b**, the Solidity types are the same C1-style ETH and ERC20 forward
 
 ## Features
 
-- **Multi-chain L1 coverage**: Ethereum, BSC, Polygon, Tron (USDT), and Coinweb L1 devnets with pinned v1.0.2 addresses
+- **Multi-chain L1 coverage**: Ethereum, BSC, Arbitrum, Base, Polygon, Tron (USDT), and Coinweb L1 devnets with pinned v1.0.2 addresses
 - **ETH and ERC20 paths**: Separate C1/C2 families for event and payload trade-offs
 - **Bounded accounting**: Per-key `paid` and `nonce` limits (`maxPayment`, `maxNonce`) for predictable settlement
 - **Aggregator fees**: C1 contracts support multiple fee recipients per transfer (where deployed)
