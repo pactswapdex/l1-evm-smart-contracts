@@ -1,0 +1,11 @@
+{
+  "network": "base",
+  "chainId": "8453",
+  "address": "0x81b6711C0AeA07a60f65e92a5678c516d84cA467",
+  "constructorArgs": [
+    "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2"
+  ],
+  "deploymentHash": "0xf647565453d18a8696c71aab940c0bdcf32008e5abb745aae7144091e658e591",
+  "blockNumber": 48051267,
+  "timestamp": "2026-07-01T07:44:42.598Z"
+}

@@ -1,0 +1,11 @@
+{
+  "network": "arbitrum",
+  "chainId": "42161",
+  "address": "0x4E0641647b4Bb75B0ecfd136a436C4cE09Fc296A",
+  "constructorArgs": [
+    "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"
+  ],
+  "deploymentHash": "0xf8c684a4cc3ef09fe46d65ccae21bf01707123f362711512c37f4db74f2efc03",
+  "blockNumber": 479199427,
+  "timestamp": "2026-07-01T07:36:36.458Z"
+}
