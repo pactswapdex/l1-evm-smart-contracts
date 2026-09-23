@@ -24,9 +24,11 @@ interface IC1Evm {
 
 interface IC2Evm {
     function transfer(
+        uint256 e,
         uint256 l,
         uint256 m,
-        address payable r
+        address payable r,
+        bytes calldata d
     ) external payable;
 }
 

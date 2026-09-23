@@ -2,6 +2,8 @@ import hre from 'hardhat';
 import { formatEther, parseEther } from 'ethers';
 import type { C2Erc20Bep20, MockERC20 } from '../types/ethers-contracts/index.js';
 
+const environmentId = 42n;
+
 describe('C2_ERC20_BEP20 Stress Tests', function () {
   this.timeout(120000); // 2 minutes timeout
 
@@ -64,7 +66,7 @@ describe('C2_ERC20_BEP20 Stress Tests', function () {
       const maxAllowedPayment = scenario.value * 2n;
 
       try {
-        const tx = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, scenario.value, '0x', {
+        const tx = await c2erc20.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, scenario.value, '0x', {
           gasLimit: 150000,
         });
 
@@ -152,7 +154,7 @@ describe('C2_ERC20_BEP20 Stress Tests', function () {
         concurrentPromises.push(
           (async () => {
             try {
-              const tx = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, value, '0x', {
+              const tx = await c2erc20.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, value, '0x', {
                 gasLimit: 150000,
               });
               const receipt = await tx.wait();
@@ -193,7 +195,7 @@ describe('C2_ERC20_BEP20 Stress Tests', function () {
 
       try {
         // First transfer to reach maxAllowedPayment
-        const tx = await c2erc20.transfer(l2LinkedId, maxAllowedPayment, recipient.address, value, '0x', {
+        const tx = await c2erc20.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, value, '0x', {
           gasLimit: 150000,
         });
         const receipt = await tx.wait();

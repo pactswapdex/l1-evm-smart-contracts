@@ -30,6 +30,7 @@ contract C2Evm is ReentrancyGuard {
     /**
      * @notice Emitted after a successful transfer.
      * @dev `n` is the pre-increment nonce (i.e. current nonce before this transfer).
+     * @param e Environment identifier of the caller that uses this contract.
      * @param l L2 linked identifier.
      * @param n Nonce (monotonically increasing per (r, l)).
      * @param r Recipient that received ETH.
@@ -37,11 +38,21 @@ contract C2Evm is ReentrancyGuard {
      * @param d Additional data for L2 / off-chain processing.
      */
     event T( // Transfer event with shortened name
+        uint256 indexed e, // environmentId
         uint256 indexed l, // l2LinkedId
         uint256 indexed n, // nonce
         address r, // recipient
         uint256 a, // amount
         bytes d // data
+    );
+
+    /**
+     * @notice Emitted alongside `T` so indexers can filter by environment id.
+     * @dev Analog of C1 `LinkedId`, but the indexed value is the environment id.
+     * @param e Environment identifier of the caller that uses this contract.
+     */
+    event L( // LinkedId
+        uint256 indexed e // environmentId
     );
 
     /**
@@ -82,12 +93,14 @@ contract C2Evm is ReentrancyGuard {
      *  - Reentrancy: the external call happens after state update; a reentrant call
      *    will observe the updated state and cannot bypass the `m` bound.
      *
+     * @param e Environment identifier of the caller that uses this contract.
      * @param l L2 linked identifier for off-chain / cross-chain correlation.
      * @param m Maximum allowed cumulative paid for this (r, l).
      * @param r Recipient of the ETH.
      * @param d Additional data for L2 / off-chain processing.
      */
     function transfer(
+        uint256 e,        // environmentId
         uint256 l,        // l2LinkedId
         uint256 m,        // maxAllowedPayment
         address payable r, // recipient
@@ -123,7 +136,8 @@ contract C2Evm is ReentrancyGuard {
                 }
             }
             
-            emit T(l, n, r, msg.value, d);
+            emit T(e, l, n, r, msg.value, d);
+            emit L(e);
         }
     }
 

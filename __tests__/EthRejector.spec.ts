@@ -1,6 +1,8 @@
 import { expect } from "chai";
 import hre from "hardhat";
 
+const environmentId = 42n;
+
 /**
  * Asserts C2 `transfer` does not succeed (EthRejector / failed ETH forward).
  * Uses `transfer` + `wait()` and `.eventually.be.rejected` instead of `.to.revert(ethers)`
@@ -16,7 +18,7 @@ async function expectC2TransferReverted(
   // chai-as-promised adds `.eventually` at runtime; default Chai types omit it.
   await (expect(
     (async () => {
-      const tx = await c2evm.transfer(l2LinkedId, maxAllowedPayment, to, "0x", {
+      const tx = await c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, to, "0x", {
         value,
       });
       const receipt = await tx.wait();
@@ -205,12 +207,12 @@ describe("C2_EVM with EthRejector as recipient", function () {
 
       // Act & Assert - should succeed for normal recipient
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, "0x", {
+        c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, "0x", {
           value: transferAmount,
         })
       )
         .to.emit(c2evm, "T")
-        .withArgs(l2LinkedId, 0n, recipient.address, transferAmount, "0x");
+        .withArgs(environmentId, l2LinkedId, 0n, recipient.address, transferAmount, "0x");
 
       const finalBalance = await ethers.provider.getBalance(recipient.address);
       expect(finalBalance - initialBalance).to.equal(transferAmount);
@@ -234,12 +236,12 @@ describe("C2_EVM with EthRejector as recipient", function () {
 
       // Act & Assert - should succeed for normal recipient
       await expect(
-        c2evm.transfer(l2LinkedId + 1n, maxAllowedPayment, recipient.address, "0x", {
+        c2evm.transfer(environmentId, l2LinkedId + 1n, maxAllowedPayment, recipient.address, "0x", {
           value: transferAmount,
         })
       )
         .to.emit(c2evm, "T")
-        .withArgs(l2LinkedId + 1n, 0n, recipient.address, transferAmount, "0x");
+        .withArgs(environmentId, l2LinkedId + 1n, 0n, recipient.address, transferAmount, "0x");
     });
   });
 

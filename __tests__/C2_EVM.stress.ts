@@ -3,6 +3,8 @@ import hre from 'hardhat';
 import { formatEther, parseEther } from 'ethers';
 import type { C2Evm } from '../types/ethers-contracts/index.js';
 
+const environmentId = 42n;
+
 describe('C2_EVM Stress Tests', function () {
   this.timeout(120000); // 2 minutes timeout
 
@@ -53,7 +55,7 @@ describe('C2_EVM Stress Tests', function () {
       const maxAllowedPayment = scenario.value * 2n;
 
       try {
-        const tx = await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+        const tx = await c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
           value: scenario.value,
           gasLimit: 100000,
         });
@@ -132,7 +134,7 @@ describe('C2_EVM Stress Tests', function () {
         concurrentPromises.push(
           (async () => {
             try {
-              const tx = await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+              const tx = await c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
                 value,
                 gasLimit: 100000,
               });
@@ -178,7 +180,7 @@ describe('C2_EVM Stress Tests', function () {
         const maxAllowedPayment = value * 2n;
 
         try {
-          const tx = await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+          const tx = await c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
             value,
             gasLimit: 100000,
           });

@@ -1,6 +1,8 @@
 import { expect } from "chai";
 import hre from "hardhat";
 
+const environmentId = 42n;
+
 describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
   let c2Evm: any;
   let maliciousUser: any;
@@ -44,6 +46,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       
       // Act - LP settles pact by paying malicious user
       const tx = await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
@@ -83,6 +86,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       await maliciousUser.enableAttack();
       
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
@@ -94,6 +98,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       await maliciousUser.disableAttack();
       
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
@@ -120,6 +125,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       
       // First settlement: 1 ETH
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
@@ -130,6 +136,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       // Second settlement: 0.6 ETH would exceed max (1 + 0.6 = 1.6 > 1.5)
       await expect(
         c2Evm.connect(lp).transfer(
+          environmentId,
           l2LinkedId,
           maxPayment,
           maliciousUserAddress,
@@ -156,6 +163,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       
       // Make settlement
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
@@ -179,6 +187,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       
       // Make 3 settlements
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
@@ -187,6 +196,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       );
       
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
@@ -195,6 +205,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       );
       
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
@@ -227,6 +238,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       
       // LP settles pact
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedId,
         maxPayment,
         maliciousUserAddress,
@@ -254,6 +266,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       
       // LP settles
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedId,
         maxPayment,
         normalUserAddress,
@@ -281,6 +294,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       
       // LP settles pact with normal user (EOA)
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedId,
         maxPayment,
         normalUser.address,
@@ -290,6 +304,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       
       // Make another settlement
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedId,
         maxPayment,
         normalUser.address,
@@ -320,6 +335,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       
       // Settlement to normal user - works fine
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedIdNormal,
         maxPayment,
         normalUser.address,
@@ -329,6 +345,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       
       // Settlement to malicious user - still works, but reentrancy blocked
       await c2Evm.connect(lp).transfer(
+        environmentId,
         l2LinkedIdMalicious,
         maxPayment,
         maliciousUserAddress,
@@ -361,6 +378,7 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
       // Act & Assert - Check that Transfer event is emitted correctly
       await expect(
         c2Evm.connect(lp).transfer(
+          environmentId,
           l2LinkedId,
           maxPayment,
           maliciousUserAddress,
@@ -369,12 +387,15 @@ describe("C2_EVM - Reentrancy Protection Tests (LP Settlement)", function () {
         )
       ).to.emit(c2Evm, "T")
         .withArgs(
+          environmentId,
           l2LinkedId,
           0n, // nonce = 0 (first settlement)
           maliciousUserAddress,
           settlementAmount,
           '0x'
-        );
+        )
+        .and.to.emit(c2Evm, "L")
+        .withArgs(environmentId);
       
       // Event should be emitted exactly once, not multiple times from reentrancy
     });

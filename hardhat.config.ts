@@ -3,7 +3,9 @@ import hardhatToolboxMochaEthers from '@nomicfoundation/hardhat-toolbox-mocha-et
 import hardhatVerify from '@nomicfoundation/hardhat-verify';
 import * as dotenv from 'dotenv';
 
-dotenv.config();
+// override: Yarn injects .env.yarn before this file loads. A blank key there
+// must not hide the value from .env.
+dotenv.config({ override: true });
 
 const config: HardhatUserConfig = {
   plugins: [hardhatToolboxMochaEthers, hardhatVerify],

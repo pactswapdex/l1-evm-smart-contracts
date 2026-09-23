@@ -29,6 +29,7 @@ contract C2Erc20Bep20 is ReentrancyGuard {
     /**
      * @notice Emitted after a successful token transfer.
      * @dev `n` is the pre-increment nonce.
+     * @param e Environment identifier of the caller that uses this contract.
      * @param l L2 linked identifier.
      * @param n Nonce (monotonically increasing per (r, l)).
      * @param r Recipient that received tokens.
@@ -36,11 +37,21 @@ contract C2Erc20Bep20 is ReentrancyGuard {
      * @param d Additional data for L2 / off-chain processing.
      */
     event T( // Transfer
+        uint256 indexed e, // environmentId
         uint256 indexed l, // l2LinkedId
         uint256 indexed n, // nonce
         address r, // recipient
         uint256 a, // amount
         bytes d // data
+    );
+
+    /**
+     * @notice Emitted alongside `T` so indexers can filter by environment id.
+     * @dev Analog of C1 `LinkedId`, but the indexed value is the environment id.
+     * @param e Environment identifier of the caller that uses this contract.
+     */
+    event L( // LinkedId
+        uint256 indexed e // environmentId
     );
 
     /**
@@ -87,6 +98,7 @@ contract C2Erc20Bep20 is ReentrancyGuard {
      *  - `m` caps the cumulative paid amount for (r, l).
      *  - Accounting is updated before interacting with the external token contract.
      *
+     * @param e Environment identifier of the caller that uses this contract.
      * @param l L2 linked identifier.
      * @param m Max allowed cumulative paid for (r, l).
      * @param r Recipient.
@@ -94,6 +106,7 @@ contract C2Erc20Bep20 is ReentrancyGuard {
      * @param d Additional data for L2 / off-chain processing.
      */
     function transfer(
+        uint256 e,    // environmentId
         uint256 l,    // l2LinkedId
         uint256 m,    // maxAllowedPayment
         address r,    // recipient
@@ -124,7 +137,8 @@ contract C2Erc20Bep20 is ReentrancyGuard {
             // Pull tokens from sender; requires allowance from `msg.sender` to this contract.
             t.safeTransferFrom(msg.sender, r, a);
             
-            emit T(l, n, r, a, d);
+            emit T(e, l, n, r, a, d);
+            emit L(e);
         }
     }
 

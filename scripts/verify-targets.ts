@@ -9,7 +9,9 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Contracts to verify (in lowercase for proper comparison)
+// Contracts to verify (in lowercase for proper comparison).
+// The script only verifies addresses that also exist in deployments/<network>_*.
+// Run once per network: `--network bsc` and `--network arbitrum`.
 const TARGET_ADDRESSES = [
   ''.toLowerCase()
 ];

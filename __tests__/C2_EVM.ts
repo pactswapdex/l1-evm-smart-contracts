@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 import hre from 'hardhat';
 
+const environmentId = 42n;
+
 describe('C2_EVM', function () {
   let c2evm: any;
   let owner: any, recipient: any, otherAccount: any;
@@ -24,12 +26,14 @@ describe('C2_EVM', function () {
       const initialBalance = await ethers.provider.getBalance(recipient.address);
 
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+        c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
           value: transferAmount,
         })
       )
         .to.emit(c2evm, 'T')
-        .withArgs(l2LinkedId, 0n, recipient.address, transferAmount, '0x');
+        .withArgs(environmentId, l2LinkedId, 0n, recipient.address, transferAmount, '0x')
+        .and.to.emit(c2evm, 'L')
+        .withArgs(environmentId);
 
       const finalBalance = await ethers.provider.getBalance(recipient.address);
       expect(finalBalance - initialBalance).to.equal(transferAmount);
@@ -40,14 +44,14 @@ describe('C2_EVM', function () {
       const maxAllowedPayment = ethers.parseEther('1');
       const transferAmount = ethers.parseEther('0.3');
 
-      await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+      await c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
         value: transferAmount,
       });
 
       let paid = await c2evm.paidFor(l2LinkedId, recipient.address);
       expect(paid).to.equal(transferAmount);
 
-      await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+      await c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
         value: transferAmount,
       });
 
@@ -61,44 +65,44 @@ describe('C2_EVM', function () {
       const transferAmount = ethers.parseEther('0.1');
 
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+        c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
           value: transferAmount,
         })
       )
         .to.emit(c2evm, 'T')
-        .withArgs(l2LinkedId, 0n, recipient.address, transferAmount, '0x');
+        .withArgs(environmentId, l2LinkedId, 0n, recipient.address, transferAmount, '0x');
 
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+        c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
           value: transferAmount,
         })
       )
         .to.emit(c2evm, 'T')
-        .withArgs(l2LinkedId, 1n, recipient.address, transferAmount, '0x');
+        .withArgs(environmentId, l2LinkedId, 1n, recipient.address, transferAmount, '0x');
 
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+        c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
           value: transferAmount,
         })
       )
         .to.emit(c2evm, 'T')
-        .withArgs(l2LinkedId, 2n, recipient.address, transferAmount, '0x');
+        .withArgs(environmentId, l2LinkedId, 2n, recipient.address, transferAmount, '0x');
 
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+        c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
           value: transferAmount,
         })
       )
         .to.emit(c2evm, 'T')
-        .withArgs(l2LinkedId, 3n, recipient.address, transferAmount, '0x');
+        .withArgs(environmentId, l2LinkedId, 3n, recipient.address, transferAmount, '0x');
 
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+        c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
           value: transferAmount,
         })
       )
         .to.emit(c2evm, 'T')
-        .withArgs(l2LinkedId, 4n, recipient.address, transferAmount, '0x');
+        .withArgs(environmentId, l2LinkedId, 4n, recipient.address, transferAmount, '0x');
     });
 
     it('Should revert on zero address recipient', async function () {
@@ -107,7 +111,7 @@ describe('C2_EVM', function () {
       const transferAmount = ethers.parseEther('0.1');
 
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, ethers.ZeroAddress, '0x', {
+        c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, ethers.ZeroAddress, '0x', {
           value: transferAmount,
         })
       ).to.be.revertedWithCustomError(c2evm, 'E1');
@@ -119,7 +123,7 @@ describe('C2_EVM', function () {
       const transferAmount = ethers.parseEther('0.1');
 
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, await c2evm.getAddress(), '0x', {
+        c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, await c2evm.getAddress(), '0x', {
           value: transferAmount,
         })
       ).to.be.revertedWithCustomError(c2evm, 'E1');
@@ -130,7 +134,7 @@ describe('C2_EVM', function () {
       const maxAllowedPayment = ethers.parseEther('1');
 
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+        c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
           value: 0,
         })
       ).to.be.revertedWithCustomError(c2evm, 'E2');
@@ -141,12 +145,12 @@ describe('C2_EVM', function () {
       const maxAllowedPayment = ethers.parseEther('0.5');
       const transferAmount = ethers.parseEther('0.3');
 
-      await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+      await c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
         value: transferAmount,
       });
 
       await expect(
-        c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+        c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
           value: transferAmount,
         })
       ).to.be.revertedWithCustomError(c2evm, 'E3');
@@ -167,11 +171,11 @@ describe('C2_EVM', function () {
       const maxAllowedPayment = ethers.parseEther('1');
       const transferAmount = ethers.parseEther('0.1');
 
-      await c2evm.transfer(l2LinkedId1, maxAllowedPayment, recipient.address, '0x', {
+      await c2evm.transfer(environmentId, l2LinkedId1, maxAllowedPayment, recipient.address, '0x', {
         value: transferAmount,
       });
 
-      await c2evm.transfer(l2LinkedId2, maxAllowedPayment, recipient.address, '0x', {
+      await c2evm.transfer(environmentId, l2LinkedId2, maxAllowedPayment, recipient.address, '0x', {
         value: transferAmount,
       });
 
@@ -189,19 +193,19 @@ describe('C2_EVM', function () {
       const maxAllowedPayment = ethers.parseEther('1');
       const transferAmount = ethers.parseEther('0.1');
 
-      const tx1 = await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+      const tx1 = await c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
         value: transferAmount,
       });
       const receipt1 = await tx1.wait();
       console.log('Gas used (cold storage):', receipt1?.gasUsed);
 
-      const tx2 = await c2evm.transfer(l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
+      const tx2 = await c2evm.transfer(environmentId, l2LinkedId, maxAllowedPayment, recipient.address, '0x', {
         value: transferAmount,
       });
       const receipt2 = await tx2.wait();
       console.log('Gas used (warm storage):', receipt2?.gasUsed);
 
-      const tx3 = await c2evm.transfer(2n, maxAllowedPayment, recipient.address, '0x', {
+      const tx3 = await c2evm.transfer(environmentId, 2n, maxAllowedPayment, recipient.address, '0x', {
         value: transferAmount,
       });
       const receipt3 = await tx3.wait();
