@@ -20,8 +20,8 @@ const VERIFY_CONTRACTS = true;
 
 /** Which contract types to deploy */
 const DEPLOY = {
-  C1_EVM: true,
-  C1_ERC20: true,
+  C1_EVM: false,
+  C1_ERC20: false,
   C2_EVM: true,
   C2_ERC20: true,
 };
@@ -42,10 +42,10 @@ const TOKENS: Record<string, { name: string; address: string }[]> = {
     { name: 'USD1', address: '0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d' },
   ],
   bsc: [
-    // { name: 'USD1', address: '0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d' },
+    { name: 'USD1', address: '0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d' },
     // { name: 'USDC', address: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d' },
     { name: 'USDT', address: '0x55d398326f99059fF775485246999027B3197955' },
-    // { name: 'WBTC', address: '0x0555E30da8f98308EdB960aa94C0Db47230d2B9c' },
+    { name: 'WBTC', address: '0x0555E30da8f98308EdB960aa94C0Db47230d2B9c' },
   ],
   polygon: [
     { name: 'USDT', address: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F' },

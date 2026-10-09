@@ -1,0 +1,11 @@
+{
+  "network": "polygon",
+  "chainId": "137",
+  "address": "0xA3C365C57867B495d2fA1A2A45AAfD6F12e635e4",
+  "constructorArgs": [
+    "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
+  ],
+  "deploymentHash": "0xb1da5bde515f6bbade194e82acf1112c25508fc49fad7603ea58a3b4891ebeb6",
+  "blockNumber": 95217834,
+  "timestamp": "2026-10-09T07:46:09.462Z"
+}
