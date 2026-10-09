@@ -120,8 +120,7 @@ const config: HardhatUserConfig = {
     },
     polygon: {
       type: 'http',
-      // url: 'https://bor.coinhq.store',
-      url: 'https://rpc.ankr.com/polygon/b8f246b1f10b371f1aa3783aac1ee083ffc15a9cf20ca4bd8f011485ce3e548b',
+      url: 'https://bor.coinhq.store',
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
     arbitrum: {

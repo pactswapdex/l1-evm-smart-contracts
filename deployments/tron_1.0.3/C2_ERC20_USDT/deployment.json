@@ -1,0 +1,9 @@
+{
+  "network": "tron",
+  "address": "TLY6B85PbLtU16pm783rdskLWRJBTLkSGF",
+  "constructorArgs": [
+    "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+  ],
+  "deploymentHash": "296c804168cbc892782b6f768930c63d7a6080908fc0872067970040071f39bf",
+  "timestamp": "2026-10-09T08:31:49.348Z"
+}
