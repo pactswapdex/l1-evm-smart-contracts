@@ -133,6 +133,11 @@ const config: HardhatUserConfig = {
       url: 'https://base-mainnet.public.blastapi.io',
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
+    dogeosTestnet: {
+      type: 'http',
+      url: 'https://rpc.testnet.dogeos.com',
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
   },
   verify: {
     etherscan: {
